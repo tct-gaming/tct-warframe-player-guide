@@ -2,6 +2,7 @@
 title: Introduction
 root: '/docs'
 parents: ['Get Started']
+order: 100
 ---
 
 <h1 align="center">
