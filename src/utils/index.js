@@ -1,6 +1,7 @@
 // Redo this for the headings.
 export const sortTree = tree => {
   tree.sort((a, b) => {
+    // console.log([a.title, b.title])
     if (
       ((a.children && b.children) || (!a.children && !b.children)) &&
       a.title > b.title
@@ -20,20 +21,6 @@ export const orderComparator = (menuA, menuB) => {
   }
 
   return comparison;
-}
-
-export const convertToTree = data => {
-  const list = data.map(edge => {
-    return {
-      path: edge.node.fields.slug,
-      key: edge.node.id,
-      title: edge.node.frontmatter.title,
-      parents: edge.node.frontmatter.parents,
-      order: edge.node.frontmatter.order || 0,
-    }
-  })
-
-  return constructTree(list)
 }
 
 export const constructTree = list => {
@@ -68,4 +55,33 @@ export const constructTree = list => {
   })
 
   return [tree, dir]
+}
+
+// export const convertToTree = data => {
+//   const list = data.map(edge => ({
+//     path: edge.node.fields.slug,
+//     key: edge.node.id,
+//     title: edge.node.frontmatter.title,
+//     parents: edge.node.frontmatter.parents,
+//     order: edge.node.frontmatter.order || 0,
+//   }))
+
+//   return constructTree(list)
+// }
+
+export const convertToTree = data => {
+  const list = data.map(edge => {
+    console.log(`${JSON.stringify(edge.node.frontmatter)},`)
+    // console.log('edge', edge.node.frontmatter)
+
+    return {
+      path: edge.node.fields.slug,
+      key: edge.node.id,
+      title: edge.node.frontmatter.title,
+      parents: edge.node.frontmatter.parents,
+      order: edge.node.frontmatter.order || 0,
+    }
+  })
+
+  return constructTree(list)
 }
