@@ -4,7 +4,7 @@ import Menu from 'antd/lib/menu'
 import 'antd/lib/menu/style/css'
 import { pathPrefix } from '../gatsby-config'
 import LowerLinks from 'layout/Sidebar/LowerLinks'
-import { orderComparator, sortTree, convertToTree } from 'utils'
+import { orderComparator, convertToTree } from 'utils'
 
 const SubMenu = Menu.SubMenu
 
@@ -40,7 +40,9 @@ export const SidebarContents = ({ root }: Props) => {
             node.node.fields.slug.startsWith(root)
           )
         )
-        sortTree(tree)
+
+        tree.sort(orderComparator)
+
         const loop = data =>
           data.map(item => {
             if (item.children) {

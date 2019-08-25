@@ -36,7 +36,7 @@ const IndexPage = () => (
     {/* </Button.Group> */}
 
     <div style={{ marginTop: '20px' }}>
-      <Link to="/docs/new-player/introduction">
+      <Link to="/docs">
         <img src={logo} />
       </Link>      
     </div>

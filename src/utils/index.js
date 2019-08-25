@@ -1,16 +1,5 @@
-// Redo this for the headings.
-export const sortTree = tree => {
-  tree.sort((a, b) => {
-    // console.log([a.title, b.title])
-    if (
-      ((a.children && b.children) || (!a.children && !b.children)) &&
-      a.title > b.title
-    )
-      return 1
-    else if (a.children) return 1
-    return -1
-  })
-}
+// External config file.
+import config from '../../contents/docs/config.json'
 
 export const orderComparator = (menuA, menuB) => {
   let comparison = 0;
@@ -28,6 +17,7 @@ export const constructTree = list => {
   let dir = []
 
   list.forEach(item => {
+    // My version doesn't handle this; what happens if there is no "parents: []" in the slug?
     if (item.parents === [] || item.parents === null) {
       tree.push(item)
     }
@@ -39,17 +29,18 @@ export const constructTree = list => {
           const newNode = {
             key: item.path,
             title: item.parents[i],
+            order: config.order[item.parents[i]] || 0,
             children: [],
           }
-
+          
           subtree.push(newNode)
           dir.push(newNode)
         }
 
-        // Sort here.
         subtree = subtree.find(node => node.title === item.parents[i] && node.children).children
       }
 
+      // Children
       subtree.push(item)
     }
   })
@@ -57,31 +48,12 @@ export const constructTree = list => {
   return [tree, dir]
 }
 
-// export const convertToTree = data => {
-//   const list = data.map(edge => ({
-//     path: edge.node.fields.slug,
-//     key: edge.node.id,
-//     title: edge.node.frontmatter.title,
-//     parents: edge.node.frontmatter.parents,
-//     order: edge.node.frontmatter.order || 0,
-//   }))
-
-//   return constructTree(list)
-// }
-
-export const convertToTree = data => {
-  const list = data.map(edge => {
-    console.log(`${JSON.stringify(edge.node.frontmatter)},`)
-    // console.log('edge', edge.node.frontmatter)
-
-    return {
-      path: edge.node.fields.slug,
-      key: edge.node.id,
-      title: edge.node.frontmatter.title,
-      parents: edge.node.frontmatter.parents,
-      order: edge.node.frontmatter.order || 0,
-    }
-  })
-
-  return constructTree(list)
-}
+export const convertToTree = data => (
+  constructTree(data.map(edge => ({
+    path: edge.node.fields.slug,
+    key: edge.node.id,
+    title: edge.node.frontmatter.title,
+    parents: edge.node.frontmatter.parents,
+    order: edge.node.frontmatter.order || 0,
+  })))
+)
