@@ -35,11 +35,12 @@ Edit files in `/content/docs` and see live updates.
 - [x] Syntax highlighting
 
 ## Product enhancements include
+- [x] Better sidebar building conventions
+- [x] Sidebar sorting
 - [ ] Tabs for builds (use YAML)
   - [ ] For example:
     - [ ] http://www.dxsonline.com/warframe-weapons.html
     - [ ] https://reactcommunity.org/react-tabs/
-- [ ] Better sidebar building conventions
 - [ ] Relative imports for the `content` directory
 - [ ] Documentation for this Repo
   - [ ] On how to add content to this
@@ -51,6 +52,7 @@ Edit files in `/content/docs` and see live updates.
 - [ ] Improved typings
 - [ ] Improved responsiveness
 - [ ] Add Search
+- [ ] Upgrade Gatsbyjs
 
 ## Future content includes
 - [ ] Player guides (how to play frames et al)
