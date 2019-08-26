@@ -22,7 +22,7 @@ export class Header extends Component<Props> {
             </a>
           </Menu.Item>
           <Menu.Item>
-            <a href="https://github.com/tct-gaming/warframe-wiki" target="_blank">
+            <a href="https://github.com/tct-gaming/tct-warframe-player-guide" target="_blank">
               <Icon type="github" theme="filled"/>
               Repo
             </a>
